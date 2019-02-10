@@ -4,10 +4,19 @@ Jinja2 Documentation:    http://jinja.pocoo.org/2/documentation/
 Werkzeug Documentation:  http://werkzeug.pocoo.org/documentation/
 This file creates your application.
 """
-
+import datetime
 from app import app
 from flask import render_template, request, redirect, url_for, flash
 
+###
+# Setting profile creation date.
+###
+current_time = datetime.datetime.now() # today's date
+date_joined = current_time
+date = date_joined.strftime("%b, %Y") 
+
+def format_date_joined(date):
+    return date
 
 ###
 # Routing for your application.
@@ -17,12 +26,22 @@ from flask import render_template, request, redirect, url_for, flash
 def home():
     """Render website's home page."""
     return render_template('home.html')
+    
+
+
+@app.route('/profile/')
+def profile():
+    """Render user profile."""
+    now=format_date_joined(date)
+    shortbio="The father of reggae and the kicker of balls. Without me and my music there would be no dancehall. I am booked out in heaven. Look out for me and 2pac in concert this Easter."
+    return render_template('profile.html',fullname="Bob Marley",username="Bmarley",parish="Kingston",country="Jamaica",date=now, shortbio=shortbio,posts="7",following="100",followers="250")
+
 
 
 @app.route('/about/')
 def about():
     """Render the website's about page."""
-    return render_template('about.html', name="Mary Jane")
+    return render_template('about.html', name="Bob Marley")
 
 
 ###
