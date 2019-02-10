@@ -13,9 +13,11 @@ from flask import render_template, request, redirect, url_for, flash
 ###
 current_time = datetime.datetime.now() # today's date
 date_joined = current_time
-date = date_joined.strftime("%b, %Y") 
+date = date_joined
+
 
 def format_date_joined(date):
+    date=date_joined.strftime("%b, %Y") 
     return date
 
 ###
